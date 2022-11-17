@@ -1,24 +1,28 @@
 {% extends "base.html" %}
 
+
 {% block title %}
 Graph
 {% endblock title %}
 
 {% block content %}
-<div class="chart-container" style="position: relative; height:50vh; width:100%">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="line_card">
     <canvas id = "lineChart"></canvas>
 </div>
 
-<div class="chart-container" style="position: relative; height:50vh; width:100%">
+<div class="bar_card">
     <canvas id = "barChart"></canvas>
 </div>
 
-<div class="chart-container" style="position: relative; height:50vh; width:100%">
+<div class="pie_card">
     <canvas id = "pieChart"></canvas>
 </div>
 
 
 <script>
+    Chart.defaults.color = '#d1d1d1';
     var ctx = document.getElementById("lineChart").getContext("2d");
     var lineChart = new Chart(ctx, {
         type: "line",
@@ -29,17 +33,20 @@ Graph
                     label: "Commits",
                     data: {{ values1 | safe }},
                     fill: true,
-                    borderColor: "rgb(75, 1992, 192)",
+                    borderColor: "#e14eca",
                     lineTension: 0.1
                 }
             ]
         },
 
         options: {
-
             scales: {
                 y: {
-                    beginAtZero: true
+                    ticks: {color: "#d1d1d1", beginAtZero: true}
+                },
+
+                x: {
+                    ticks: {color: "#d1d1d1"}
                 }
             },
 
@@ -58,7 +65,7 @@ Graph
                     label: "Commits",
                     data: {{ values2 | safe }},
                     fill: true,
-                    borderColor: "rgb(75, 1992, 192)",
+                    borderColor: "#e14eca",
                     borderWidth: 3
                 }
             ]
@@ -67,7 +74,11 @@ Graph
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    ticks: {color: "#d1d1d1", beginAtZero: true}
+                },
+
+                x: {
+                    ticks: {color: "#d1d1d1"}
                 }
             },
 
@@ -85,7 +96,7 @@ Graph
                     label: "Commits",
                     data: {{ values3 | safe }},
                     fill: true,
-                    borderColor: "rgb(75, 1992, 192)",
+                    borderColor: "#e14eca",
                     borderWidth: 3
                 }
             ]
