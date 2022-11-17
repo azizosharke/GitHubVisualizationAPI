@@ -16,6 +16,7 @@ Assignment 3 for CSU33012 SOFTWARE ENGINEERING - Main project
 ### On Terminal (again)　　
   pip install -r requirements.txt  
   export FLASK_APP=setup.py for mac and linux users
+  
   set FLASK_APP=setup.py for windows users 
   
   flask run --host=0.0.0.0 --port=8081  
