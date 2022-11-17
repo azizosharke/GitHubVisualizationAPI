@@ -10,7 +10,7 @@ Assignment 3 for CSU33012 SOFTWARE ENGINEERING - Main project
   conda activate <env name you jast made>  
 
 ### on vscode　　
-  type python select interpreter in the command palette  
+  type "python select interpreter" in the command palette  
   select interpreter with the env name you made  
   
 ### On Terminal (again)　　
