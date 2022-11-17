@@ -1,10 +1,8 @@
 # GitHubVisualizationAPI
 Assignment 3 for CSU33012 SOFTWARE ENGINEERING - Main project
 
-## How to run on vscode
+## How to run on vscode (Always on the directry of the project folder)
 Install anaconda to run python files
-
-### Always on the directry of the project folder
 
 ### On Terminal　　
   conda create -n <env name you want to make> python=3.9  
