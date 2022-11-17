@@ -18,13 +18,13 @@ Home
         </div>
     </div>
     <div class="password">
-        <label for="password" class="label">Password</label>
+        <label for="password" class="label">OAuth Token</label>
         <div>
             <input class="pas" type="password" name="password" placeholder="············" />
         </div>
     </div>
     <button class="login">
-        <a href = "{{ url_for('dashboard.graph') }}">Login</a>
+        <a href = "{{ url_for('repository_list.showList') }}">Log in</a>
     </button>
 </div>
 {% endblock content %}

@@ -1,26 +1,3 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background: #11111a;
-}
-
-header {
-    display: flex;
-    width: 100%;
-    height: 100px;
-    color: #dfdfdf;
-    margin-top: 50px;
-}
-
-.title {
-    font-size: x-large;
-    font-weight: 400;
-    margin-right: auto;
-    margin-left: 50px;
-    text-align: center;
-}
-
-
-
 .screen-1 {
     background: #1e1e2f;
     padding-left: 300px;
