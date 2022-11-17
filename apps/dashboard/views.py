@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Blueprint, render_template
 
-app = Flask(__name__)
+dashboard_bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
-@app.route("/")
+@dashboard_bp.route("/")
 def graph():
     data1 = [
         ("01-01-2020", 10),
@@ -43,7 +43,4 @@ def graph():
     labels3 = [row[0] for row in data3]
     values3 = [row[1] for row in data3]
     
-    return render_template("graph.html", labels1 = labels1, values1 = values1, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3)

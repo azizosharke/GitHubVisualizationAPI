@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/home.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+{% endblock style %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<div class="screen-1">
+    <div class="username">
+        <label for="username" class="label">Username</label>
+        <div>
+            <input type="username" name="username" placeholder="test" />
+        </div>
+    </div>
+    <div class="password">
+        <label for="password" class="label">Password</label>
+        <div>
+            <input class="pas" type="password" name="password" placeholder="············" />
+        </div>
+    </div>
+    <button class="login">
+        <a href = "{{ url_for('dashboard.graph') }}">Login</a>
+    </button>
+</div>
+{% endblock content %}

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block style %}
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/layout.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+{% endblock style %}
 
 {% block title %}
 Graph
@@ -24,6 +28,10 @@ Graph
 <script>
     Chart.defaults.color = '#d1d1d1';
     var ctx = document.getElementById("lineChart").getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "#e14ecb61");
+    gradient.addColorStop(0.5, "#e14ecb33");
+    gradient.addColorStop(1, "#e14ecb09");
     var lineChart = new Chart(ctx, {
         type: "line",
         data: {
@@ -32,6 +40,7 @@ Graph
                 {
                     label: "Commits",
                     data: {{ values1 | safe }},
+                    backgroundColor: gradient,
                     fill: true,
                     borderColor: "#e14eca",
                     lineTension: 0.1
@@ -42,11 +51,14 @@ Graph
         options: {
             scales: {
                 y: {
-                    ticks: {color: "#d1d1d1", beginAtZero: true}
+                    ticks: {color: "#d1d1d1", beginAtZero: true},
                 },
 
                 x: {
-                    ticks: {color: "#d1d1d1"}
+                    ticks: {color: "#d1d1d1"},
+                    grid: {
+                        color: "#e14ecb21"
+                    }
                 }
             },
 
@@ -56,6 +68,10 @@ Graph
     });
 
     var ctx = document.getElementById("barChart").getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "#1d8bf83f");
+    gradient.addColorStop(0.5, "#1d8bf815");
+    gradient.addColorStop(1, "#1d8bf80c");
     var barChart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -65,7 +81,8 @@ Graph
                     label: "Commits",
                     data: {{ values2 | safe }},
                     fill: true,
-                    borderColor: "#e14eca",
+                    backgroundColor: gradient,
+                    borderColor: "#1d8cf8",
                     borderWidth: 3
                 }
             ]
@@ -74,11 +91,17 @@ Graph
         options: {
             scales: {
                 y: {
-                    ticks: {color: "#d1d1d1", beginAtZero: true}
+                    ticks: {color: "#d1d1d1", beginAtZero: true},
+                    grid: {
+                        color: "#1d8bf829"
+                    }
                 },
 
                 x: {
-                    ticks: {color: "#d1d1d1"}
+                    ticks: {color: "#d1d1d1"},
+                    grid: {
+                        color: "#1d8bf829"
+                    }
                 }
             },
 
@@ -96,7 +119,8 @@ Graph
                     label: "Commits",
                     data: {{ values3 | safe }},
                     fill: true,
-                    borderColor: "#e14eca",
+                    backgroundColor: "#00cca313",
+                    borderColor: "#00cca4",
                     borderWidth: 3
                 }
             ]
@@ -108,4 +132,6 @@ Graph
     });
 
 </script>
+
+
 {% endblock content %}
