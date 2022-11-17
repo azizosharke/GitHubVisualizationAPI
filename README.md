@@ -2,6 +2,7 @@
 Assignment 3 for CSU33012 SOFTWARE ENGINEERING - Main project
 
 ## How to run on vscode
+Install anaconda to run python files
 
 ### Always on the directry of the project folder
 
