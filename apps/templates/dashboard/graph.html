@@ -49,6 +49,13 @@ Graph
         },
 
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'The number of commits you have made in repositories over the last 7 days'
+                }
+            },
+
             scales: {
                 y: {
                     ticks: {color: "#d1d1d1", beginAtZero: true},
@@ -89,6 +96,13 @@ Graph
         },
 
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Lets take a look at the amount of commits you have made in your repositories.'
+                }
+            },
+
             indexAxis: 'y',
             scales: {
                 y: {
@@ -128,6 +142,13 @@ Graph
         },
 
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'The spread of languages used in your repositories'
+                }
+            },
+
             maintainAspectRatio: false
         }
     });
