@@ -33,6 +33,10 @@ def getUserRepos(username, token):
     ## returns array with repo names
     return repoNames
 
+@repository_list_bp.errorhandler(400)
+def page_not_found(error):
+    error = "error: enter a valid username"
+    return render_template('login.html', error=error)
 
 @repository_list_bp.route("/")
 def showList():
