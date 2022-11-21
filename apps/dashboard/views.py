@@ -107,6 +107,37 @@ def getCommitsFromLast7Days(userInput, repoInput):
 
     return commitsPerDay
 
+#### Get the count of Commits by repo
+def getCommitsInRepo(userInput):
+    auth_token = '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'
+    username = userInput
+
+    g = Github(auth_token)
+
+    user = g.get_user(username)
+
+    user.login
+
+    repoNames = []
+    countOfCommitsInRepo = []
+    currentCountOfCommits = 0
+    countOfRepos = 0
+
+    for repo in user.get_repos():
+        repoNames.append(repo.name)
+        countOfRepos += 1
+        currentCountOfCommits = 0
+        for commit in repo.get_commits():
+            currentCountOfCommits += 1
+        countOfCommitsInRepo.append(currentCountOfCommits)
+
+    formattedRepoArray = []
+    for x in range(countOfRepos):
+        tupleX = (repoNames[x], countOfCommitsInRepo[x])
+        formattedRepoArray.append(tupleX)
+    return formattedRepoArray
+#### Method end
+
 
 @dashboard_bp.route("/")
 def graph():
@@ -119,15 +150,7 @@ def graph():
     data1 = getCommitsFromLast7Days(username, repoName)
     
     
-    data2 = [
-        ("08-01-2020", 3),
-        ("09-01-2020", 2),
-        ("10-01-2020", 5),
-        ("11-01-2020", 8),
-        ("12-01-2020", 17),
-        ("13-01-2020", 22),
-        ("14-01-2020", 38),
-    ]
+    data2 = getCommitsInRepo(username)
     
     data3 = [
         ("15-01-2020", 18),
