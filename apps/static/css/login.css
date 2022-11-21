@@ -69,3 +69,8 @@ button {
     text-decoration: none;
     display: block;
 }
+
+.error {
+    text-align: center;
+    color: red;
+}

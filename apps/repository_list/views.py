@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, abort
 from github import Github
 
 repository_list_bp = Blueprint("repository_list", __name__, url_prefix="/repository_list")
@@ -16,7 +16,10 @@ def getUserRepos(username, token):
 
     g = Github(auth_token)
 
-    user = g.get_user(username)
+    try:
+        user = g.get_user(username)
+    except Exception:
+        abort(400)
 
     user.login
 
@@ -30,6 +33,10 @@ def getUserRepos(username, token):
     ## returns array with repo names
     return repoNames
 
+@repository_list_bp.errorhandler(400)
+def page_not_found(error):
+    error = "error: enter a valid username"
+    return render_template('login.html', error=error)
 
 @repository_list_bp.route("/")
 def showList():
