@@ -148,8 +148,23 @@ def graph():
     repoName = nameWithRepo[spaceIndex+1:]
     
     data1 = getCommitsFromLast7Days(username, repoName)
+
+    data2 = [
+        ("15-01-2020", 18),
+        ("16-01-2020", 15),
+        ("17-01-2020", 6),
+        ("18-01-2020", 14),
+        ("19-01-2020", 9),
+        ("20-01-2020", 12),
+        ("21-01-2020", 25),
+    ]
     
     labels1 = [row[0] for row in data1]
     values1 = [row[1] for row in data1]
+
+    labels2 = [row[0] for row in data2]
+    values2 = [row[1] for row in data2]
+
+    labels2
     
-    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1, username = username, repoName = repoName)
+    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1,labels2 = labels2, values2 = values2, username = username, repoName = repoName)
