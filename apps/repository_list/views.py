@@ -44,7 +44,10 @@ def getCommitsInRepo(userInput):
 
     g = Github(auth_token)
 
-    user = g.get_user(username)
+    try:
+        user = g.get_user(username)
+    except Exception:
+        abort(400)
 
     user.login
 
