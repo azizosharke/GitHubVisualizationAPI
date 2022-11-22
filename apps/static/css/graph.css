@@ -1,7 +1,7 @@
-.chart-container {
-    font-weight: 300;
+.info {
+    margin-left: 3rem;
+    color :#dadada;
 }
-
 
 .line_card {
     height: 400px;
@@ -14,8 +14,8 @@
 }
 
 .bar_card {
-    height: 400px;
-    margin-left: 50px;
+    height: 50rem;
+    margin-left: 21rem;
     margin-right: 50px;
     margin-bottom: 100px;
     padding: 20px;
@@ -24,8 +24,8 @@
 }
 
 .pie_card {
-    height: 400px;
-    margin-left: 50px;
+    height: 50rem;
+    margin-left: 21rem;
     margin-right: 50px;
     margin-bottom: 100px;
     padding: 20px;
