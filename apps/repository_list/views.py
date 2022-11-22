@@ -26,7 +26,23 @@ def page_not_found(error):
     error = "error: enter a valid username"
     return render_template('login.html', error=error)
 
+<<<<<<< HEAD
 def getCommitsInRepo(user):
+=======
+def getCommitsInRepo(userInput):
+    auth_token = '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'
+    username = userInput
+
+    g = Github(auth_token)
+
+    try:
+        user = g.get_user(username)
+    except Exception:
+        abort(400)
+
+    user.login
+
+>>>>>>> ba268e57cd857a3c92079d2e3c7ee7cbdbf5a846
     repoNames = []
     countOfCommitsInRepo = []
     currentCountOfCommits = 0
