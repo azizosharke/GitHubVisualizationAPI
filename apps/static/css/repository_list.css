@@ -1,5 +1,5 @@
 .list-group {
-    width: 15rem !important;
+    width: 15rem;
     color: #dadada;
 }
 
@@ -23,6 +23,7 @@ span {
     background-color: transparent;
     border: none;
     color: #dadada;
+    overflow-wrap: break-word;
 }
 
 .sidebar {
