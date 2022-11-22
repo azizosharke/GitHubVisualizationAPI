@@ -10,16 +10,16 @@ class UserInfo:
         self.oauthToken = oauthToken
 
 
-def getUserRepos(user):
-    repoCount = 0
-    repoNames = []
+# def getUserRepos(user):
+#     repoCount = 0
+#     repoNames = []
 
-    for repo in user.get_repos():
-        repoCount += 1
-        repoNames.append(repo.name)
+#     for repo in user.get_repos():
+#         repoCount += 1
+#         repoNames.append(repo.name)
 
-    ## returns array with repo names
-    return repoNames
+#     ## returns array with repo names
+#     return repoNames
 
 @repository_list_bp.errorhandler(400)
 def page_not_found(error):
@@ -44,7 +44,7 @@ def getCommitsInRepo(user):
     for x in range(countOfRepos):
         tupleX = (repoNames[x], countOfCommitsInRepo[x])
         formattedRepoArray.append(tupleX)
-    return formattedRepoArray
+    return formattedRepoArray, repoNames
 
 @repository_list_bp.route("/")
 def showList():
@@ -63,7 +63,7 @@ def showList():
         
     user.login
     
-    data2 = getCommitsInRepo(user)
+    data2, repoNames = getCommitsInRepo(user)
     
     data3 = [
         ("15-01-2020", 18),
@@ -81,6 +81,6 @@ def showList():
     labels3 = [row[0] for row in data3]
     values3 = [row[1] for row in data3]
     
-    repoNames = getUserRepos(user)
+    # repoNames = getUserRepos(user)
     
     return render_template("repository_list/repository.html", data = repoNames, username = user_info.username, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3)
