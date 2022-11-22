@@ -7,47 +7,26 @@ repository_list_bp = Blueprint("repository_list", __name__, url_prefix="/reposit
 class UserInfo:
     def __init__(self, username, oauthToken):
         self.username = username
-        self.oauthToken = oauthToken;
+        self.oauthToken = oauthToken
 
 
-def getUserRepos(username, token):
-    # change this to user's token
-    auth_token = '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'
+# def getUserRepos(user):
+#     repoCount = 0
+#     repoNames = []
 
-    g = Github(auth_token)
+#     for repo in user.get_repos():
+#         repoCount += 1
+#         repoNames.append(repo.name)
 
-    try:
-        user = g.get_user(username)
-    except Exception:
-        abort(400)
-
-    user.login
-
-    repoCount = 0
-    repoNames = []
-
-    for repo in user.get_repos():
-        repoCount += 1
-        repoNames.append(repo.name)
-
-    ## returns array with repo names
-    return repoNames
+#     ## returns array with repo names
+#     return repoNames
 
 @repository_list_bp.errorhandler(400)
 def page_not_found(error):
     error = "error: enter a valid username"
     return render_template('login.html', error=error)
 
-def getCommitsInRepo(userInput):
-    auth_token = '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'
-    username = userInput
-
-    g = Github(auth_token)
-
-    user = g.get_user(username)
-
-    user.login
-
+def getCommitsInRepo(user):
     repoNames = []
     countOfCommitsInRepo = []
     currentCountOfCommits = 0
@@ -65,7 +44,7 @@ def getCommitsInRepo(userInput):
     for x in range(countOfRepos):
         tupleX = (repoNames[x], countOfCommitsInRepo[x])
         formattedRepoArray.append(tupleX)
-    return formattedRepoArray
+    return formattedRepoArray, repoNames
 
 @repository_list_bp.route("/")
 def showList():
@@ -75,7 +54,16 @@ def showList():
         request.args.get("oauthToken")
     )
     
-    data2 = getCommitsInRepo(user_info.username)
+    
+    g = Github('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')
+    try:
+        user = g.get_user(user_info.username)
+    except Exception:
+        abort(400)
+        
+    user.login
+    
+    data2, repoNames = getCommitsInRepo(user)
     
     data3 = [
         ("15-01-2020", 18),
@@ -93,6 +81,6 @@ def showList():
     labels3 = [row[0] for row in data3]
     values3 = [row[1] for row in data3]
     
-    repoNames = getUserRepos(user_info.username, user_info.oauthToken)
+    # repoNames = getUserRepos(user)
     
     return render_template("repository_list/repository.html", data = repoNames, username = user_info.username, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3)
