@@ -138,6 +138,32 @@ def getCommitsInRepo(userInput):
     return formattedRepoArray
 #### Method end
 
+##### Get breakdown of repos by language
+def getLanguageBreakdown(username):
+    auth_token = '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'
+    g = Github(auth_token)
+    user = g.get_user(username)
+    language_count = ([], [])
+    for repo in user.get_repos():
+        print(repo)
+        languages = repo.get_languages()
+        for language in languages.keys():
+            if language not in language_count[0]:
+                language_count[0].append(language)
+                language_count[1].append(1)
+            else:
+                language_count[1][language_count[0].index(language)] += 1
+
+    return language_count
+##### Method end
+
+#### Gives a dict with languages in a repo and how many lines
+def getRepoLanguages(repoName):
+    auth_token = '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'
+    g = Github(auth_token)
+    repo = g.get_repo(repoName)
+    return repo.get_languages()
+#### Method end
 
 @dashboard_bp.route("/")
 def graph():
