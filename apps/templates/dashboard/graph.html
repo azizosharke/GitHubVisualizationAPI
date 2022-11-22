@@ -10,18 +10,16 @@ Graph
 {% endblock title %}
 
 {% block content %}
+
+<div class="info">
+    <h1>Repository: {{ repoName }}</h1>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="line_card">
     <canvas id = "lineChart"></canvas>
-</div>
-
-<div class="bar_card">
-    <canvas id = "barChart"></canvas>
-</div>
-
-<div class="pie_card">
-    <canvas id = "pieChart"></canvas>
 </div>
 
 
@@ -31,7 +29,7 @@ Graph
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "#e14ecb61");
     gradient.addColorStop(0.5, "#e14ecb33");
-    gradient.addColorStop(1, "#e14ecb09");
+    gradient.addColorStop(1, "#e14ecb01");
     var lineChart = new Chart(ctx, {
         type: "line",
         data: {
@@ -52,7 +50,10 @@ Graph
             plugins: {
                 title: {
                     display: true,
-                    text: 'The number of commits you have made in repositories over the last 7 days'
+                    text: 'The number of commits you have made in repositories over the last 7 days',
+                    font: {
+                        size: 16
+                    }
                 }
             },
 
@@ -73,86 +74,6 @@ Graph
 
         }
     });
-
-    var ctx = document.getElementById("barChart").getContext("2d");
-    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "#1d8bf83f");
-    gradient.addColorStop(0.5, "#1d8bf815");
-    gradient.addColorStop(1, "#1d8bf80c");
-    var barChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: {{ labels2 | safe }},
-            datasets: [
-                {
-                    label: "Commits",
-                    data: {{ values2 | safe }},
-                    fill: true,
-                    backgroundColor: gradient,
-                    borderColor: "#1d8cf8",
-                    borderWidth: 3
-                }
-            ]
-        },
-
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Lets take a look at the amount of commits you have made in your repositories.'
-                }
-            },
-
-            indexAxis: 'y',
-            scales: {
-                y: {
-                    ticks: {color: "#d1d1d1", beginAtZero: true},
-                    grid: {
-                        color: "#1d8bf829"
-                    }
-                },
-
-                x: {
-                    ticks: {color: "#d1d1d1"},
-                    grid: {
-                        color: "#1d8bf829"
-                    }
-                }
-            },
-
-            maintainAspectRatio: false
-        }
-    });
-
-    var ctx = document.getElementById("pieChart").getContext("2d");
-    var barChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: {{ labels3 | safe }},
-            datasets: [
-                {
-                    label: "Commits",
-                    data: {{ values3 | safe }},
-                    fill: true,
-                    backgroundColor: "#00cca313",
-                    borderColor: "#00cca4",
-                    borderWidth: 3
-                }
-            ]
-        },
-
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'The spread of languages used in your repositories'
-                }
-            },
-
-            maintainAspectRatio: false
-        }
-    });
-
 </script>
 
 
