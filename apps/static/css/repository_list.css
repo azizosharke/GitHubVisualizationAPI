@@ -26,6 +26,10 @@ span {
     overflow-wrap: break-word;
 }
 
+span:hover {
+    color: blue;
+}
+
 .sidebar {
     position: sticky;
     top: 0px;
