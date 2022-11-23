@@ -186,15 +186,10 @@ def graph():
     values1 = [row[1] for row in data1]
  
 
-    data2 = getRepoLanguages(repoName)
-    # print(data2)
-
-    labels2,values2 = getLanguageBreakdown(username)
+    # DOESNT WORK 
+    labels2,values2 = getRepoLanguages(repoName)
 
 
-
-    # labels2 = [row[0] for row in data2]
-    # values2 = [row[1] for row in data2]
 
     
     
