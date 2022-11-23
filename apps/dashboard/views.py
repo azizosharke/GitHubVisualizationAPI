@@ -162,7 +162,12 @@ def getRepoLanguages(repoName):
     auth_token = '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'
     g = Github(auth_token)
     repo = g.get_repo(repoName)
-    return repo.get_languages()
+    line_count = ([], [])
+    langsDict = repo.get_languages()
+    for language in langsDict.keys():
+        line_count[0].append(language)
+        line_count[1].append(langsDict[language])
+    return line_count
 #### Method end
 
 @dashboard_bp.route("/")
@@ -180,6 +185,9 @@ def graph():
     labels1 = [row[0] for row in data1]
     values1 = [row[1] for row in data1]
  
+
+    data2 = getRepoLanguages(repoName)
+    # print(data2)
 
     labels2,values2 = getLanguageBreakdown(username)
 
