@@ -157,12 +157,26 @@ def getLanguageBreakdown(username):
     return language_count
 ##### Method end
 
-#### Gives a dict with languages in a repo and how many lines
-def getRepoLanguages(repoName):
+
+def getRepoLanguages(repoName,userName):
     auth_token = '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'
     g = Github(auth_token)
-    repo = g.get_repo(repoName)
-    return repo.get_languages()
+
+    user = g.get_user(userName);
+
+    user.login
+
+    try:
+        repo = user.get_repo(repoName)
+    except:
+        print("Error: Repo not found")
+        return
+    line_count = ([], [])
+    langsDict = repo.get_languages()
+    for language in langsDict.keys():
+        line_count[0].append(language)
+        line_count[1].append(langsDict[language])
+    return line_count
 #### Method end
 
 @dashboard_bp.route("/")
@@ -181,12 +195,10 @@ def graph():
     values1 = [row[1] for row in data1]
  
 
-    labels2,values2 = getLanguageBreakdown(username)
+    # DOESNT WORK 
+    labels2,values2 = getRepoLanguages(repoName,username)
 
 
-
-    # labels2 = [row[0] for row in data2]
-    # values2 = [row[1] for row in data2]
 
     
     
