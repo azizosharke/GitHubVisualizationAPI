@@ -46,6 +46,25 @@ def getCommitsInRepo(user):
         formattedRepoArray.append(tupleX)
     return formattedRepoArray, repoNames
 
+##### Get breakdown of repos by language
+def getLanguageBreakdown(username):
+    auth_token = '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'
+    g = Github(auth_token)
+    user = g.get_user(username)
+    language_count = ([], [])
+    for repo in user.get_repos():
+        print(repo)
+        languages = repo.get_languages()
+        for language in languages.keys():
+            if language not in language_count[0]:
+                language_count[0].append(language)
+                language_count[1].append(1)
+            else:
+                language_count[1][language_count[0].index(language)] += 1
+
+    return language_count
+##### Method end
+
 @repository_list_bp.route("/")
 def showList():
     
@@ -65,21 +84,14 @@ def showList():
     
     data2, repoNames = getCommitsInRepo(user)
     
-    data3 = [
-        ("15-01-2020", 18),
-        ("16-01-2020", 15),
-        ("17-01-2020", 6),
-        ("18-01-2020", 14),
-        ("19-01-2020", 9),
-        ("20-01-2020", 12),
-        ("21-01-2020", 25),
-    ]
+    
+    
     
     labels2 = [row[0] for row in data2]
     values2 = [row[1] for row in data2]
     
-    labels3 = [row[0] for row in data3]
-    values3 = [row[1] for row in data3]
+    labels3,values3 = getLanguageBreakdown(user_info.username)
+    
     
     # repoNames = getUserRepos(user)
     

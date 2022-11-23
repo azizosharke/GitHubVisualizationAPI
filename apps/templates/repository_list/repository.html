@@ -102,7 +102,7 @@ Repositry_list
             labels: {{ labels3 | safe }},
             datasets: [
                 {
-                    label: "Commits",
+                    label: "Occurences",
                     data: {{ values3 | safe }},
                     fill: true,
                     backgroundColor: "#00cca313",
@@ -116,7 +116,7 @@ Repositry_list
             plugins: {
                 title: {
                     display: true,
-                    text: 'The spread of languages used in your repositories',
+                    text: 'The number od your repositories with a Langauage',
                     font: {
                         size: 16
                     }
