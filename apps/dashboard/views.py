@@ -161,7 +161,11 @@ def getLanguageBreakdown(username):
 def getRepoLanguages(repoName):
     auth_token = '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'
     g = Github(auth_token)
-    repo = g.get_repo(repoName)
+    try:
+        repo = g.get_repo(repoName)
+    except:
+        print("Error: Repo not found")
+        return
     line_count = ([], [])
     langsDict = repo.get_languages()
     for language in langsDict.keys():
@@ -194,3 +198,6 @@ def graph():
     
     
     return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1,labels2 = labels2, values2 = values2, username = username, repoName = repoName)
+
+
+print(getRepoLanguages("public-apis/public-apis"))
