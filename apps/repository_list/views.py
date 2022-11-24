@@ -72,7 +72,7 @@ def showList():
     )
     
     
-    g = Github('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')
+    g = Github('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')
     try:
         user = g.get_user(user_info.username)
     except Exception:
