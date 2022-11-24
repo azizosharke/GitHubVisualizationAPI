@@ -45,16 +45,9 @@ def formatArrayForReturn(x0, x1, x2, x3, x4, x5, x6):
     return formattedTupleArray
 
 
-def getCommitsFromLast7Days(userInput, repoInput):
-    auth_token = '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'
-    username = userInput
-    g = Github(auth_token)
+def getCommitsFromLast7Days(user, repoInput):
 
     global commitsDay0, commitsDay1, commitsDay2, commitsDay3, commitsDay4, commitsDay5, commitsDay6
-
-    user = g.get_user(username)
-
-    user.login
 
     ## go through repos
     for repo in user.get_repos():
@@ -107,64 +100,8 @@ def getCommitsFromLast7Days(userInput, repoInput):
 
     return commitsPerDay
 
-#### Get the count of Commits by repo
-def getCommitsInRepo(userInput):
-    auth_token = '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'
-    username = userInput
 
-    g = Github(auth_token)
-
-    user = g.get_user(username)
-
-    user.login
-
-    repoNames = []
-    countOfCommitsInRepo = []
-    currentCountOfCommits = 0
-    countOfRepos = 0
-
-    for repo in user.get_repos():
-        repoNames.append(repo.name)
-        countOfRepos += 1
-        currentCountOfCommits = 0
-        for commit in repo.get_commits():
-            currentCountOfCommits += 1
-        countOfCommitsInRepo.append(currentCountOfCommits)
-
-    formattedRepoArray = []
-    for x in range(countOfRepos):
-        tupleX = (repoNames[x], countOfCommitsInRepo[x])
-        formattedRepoArray.append(tupleX)
-    return formattedRepoArray
-#### Method end
-
-##### Get breakdown of repos by language
-def getLanguageBreakdown(username):
-    auth_token = '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'
-    g = Github(auth_token)
-    user = g.get_user(username)
-    language_count = ([], [])
-    for repo in user.get_repos():
-        print(repo)
-        languages = repo.get_languages()
-        for language in languages.keys():
-            if language not in language_count[0]:
-                language_count[0].append(language)
-                language_count[1].append(1)
-            else:
-                language_count[1][language_count[0].index(language)] += 1
-
-    return language_count
-##### Method end
-
-
-def getRepoLanguages(repoName,userName):
-    auth_token = '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'
-    g = Github(auth_token)
-
-    user = g.get_user(userName);
-
-    user.login
+def getRepoLanguages(repoName,user):
 
     try:
         repo = user.get_repo(repoName)
@@ -187,16 +124,19 @@ def graph():
     username = nameWithRepo[0:spaceIndex]
     repoName = nameWithRepo[spaceIndex+1:]
     
-    data1 = getCommitsFromLast7Days(username, repoName)
-
-    print(data1)
+    g = Github('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')
+    user = g.get_user(username)
+        
+    user.login
+    
+    data1 = getCommitsFromLast7Days(user, repoName)
 
     labels1 = [row[0] for row in data1]
     values1 = [row[1] for row in data1]
  
 
     # DOESNT WORK 
-    labels2,values2 = getRepoLanguages(repoName,username)
+    labels2,values2 = getRepoLanguages(repoName,user)
 
 
 
