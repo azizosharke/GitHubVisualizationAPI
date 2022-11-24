@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, abort
 from github import Github
+import random
 
 repository_list_bp = Blueprint("repository_list", __name__, url_prefix="/repository_list")
 
@@ -47,10 +48,7 @@ def getCommitsInRepo(user):
     return formattedRepoArray, repoNames
 
 ##### Get breakdown of repos by language
-def getLanguageBreakdown(username):
-    auth_token = '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'
-    g = Github(auth_token)
-    user = g.get_user(username)
+def getLanguageBreakdown(user):
     language_count = ([], [])
     for repo in user.get_repos():
         print(repo)
@@ -74,7 +72,7 @@ def showList():
     )
     
     
-    g = Github('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')
+    g = Github('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')
     try:
         user = g.get_user(user_info.username)
     except Exception:
@@ -90,9 +88,15 @@ def showList():
     labels2 = [row[0] for row in data2]
     values2 = [row[1] for row in data2]
     
-    labels3,values3 = getLanguageBreakdown(user_info.username)
+    labels3,values3 = getLanguageBreakdown(user)
+    
+    colorPalette = []
+    
+    for _ in range(len(labels3)):
+        rgb = 'rgb(' + str(round(random.random() *255)) + ',' + str(round(random.random() *255)) + ',' + str(round(random.random() *255)) + ')'
+        colorPalette.append(rgb)
     
     
     # repoNames = getUserRepos(user)
     
-    return render_template("repository_list/repository.html", data = repoNames, username = user_info.username, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3)
+    return render_template("repository_list/repository.html", data = repoNames, username = user_info.username, labels2 = labels2, values2 = values2, labels3 = labels3, values3 = values3, colorList = colorPalette)

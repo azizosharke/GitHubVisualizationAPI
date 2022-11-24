@@ -46,7 +46,7 @@ def formatArrayForReturn(x0, x1, x2, x3, x4, x5, x6):
 
 
 def getCommitsFromLast7Days(userInput, repoInput):
-    auth_token = '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'
+    auth_token = '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'
     username = userInput
     g = Github(auth_token)
 
@@ -109,7 +109,7 @@ def getCommitsFromLast7Days(userInput, repoInput):
 
 #### Get the count of Commits by repo
 def getCommitsInRepo(userInput):
-    auth_token = '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'
+    auth_token = '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'
     username = userInput
 
     g = Github(auth_token)
@@ -140,7 +140,7 @@ def getCommitsInRepo(userInput):
 
 ##### Get breakdown of repos by language
 def getLanguageBreakdown(username):
-    auth_token = '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'
+    auth_token = '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'
     g = Github(auth_token)
     user = g.get_user(username)
     language_count = ([], [])
@@ -159,7 +159,7 @@ def getLanguageBreakdown(username):
 
 
 def getRepoLanguages(repoName,userName):
-    auth_token = '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'
+    auth_token = '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'
     g = Github(auth_token)
 
     user = g.get_user(userName);

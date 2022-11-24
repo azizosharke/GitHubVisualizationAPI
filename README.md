@@ -6,7 +6,7 @@ Assignment 3 for CSU33012 SOFTWARE ENGINEERING - Main project
 ### Always on the directry of the project folder
 
 ### On Terminal　　
-  conda create -n <env name you want to make> python=3.9  
+  conda create -n <env name you want to make> python=3.10  
   conda activate <env name you jast made>  
 
 ### on vscode　　
