@@ -46,9 +46,19 @@ def formatArrayForReturn(x0, x1, x2, x3, x4, x5, x6):
     return formattedTupleArray
 
 
-def getCommitsFromLast7Days(user, repoInput):
+def getCommitsFromLast7Days(username, repoInput):
+    g = Github('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')
+    user = g.get_user(username)
+    user.login
 
     global commitsDay0, commitsDay1, commitsDay2, commitsDay3, commitsDay4, commitsDay5, commitsDay6
+    commitsDay0 = 0
+    commitsDay1 = 0
+    commitsDay2 = 0
+    commitsDay3 = 0
+    commitsDay4 = 0
+    commitsDay5 = 0
+    commitsDay6 = 0
 
     ## go through repos
     for repo in user.get_repos():
@@ -102,8 +112,11 @@ def getCommitsFromLast7Days(user, repoInput):
     return commitsPerDay
 
 
-def getRepoLanguages(repoName,user):
-
+def getRepoLanguages(repoName,username):
+    g = Github('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')
+    user = g.get_user(username)
+    user.login
+    
     try:
         repo = user.get_repo(repoName)
     except:
@@ -125,19 +138,15 @@ def graph():
     username = nameWithRepo[0:spaceIndex]
     repoName = nameWithRepo[spaceIndex+1:]
     
-    g = Github('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')
-    user = g.get_user(username)
-        
-    user.login
     
-    data1 = getCommitsFromLast7Days(user, repoName)
+    data1 = getCommitsFromLast7Days(username, repoName)
 
     labels1 = [row[0] for row in data1]
     values1 = [row[1] for row in data1]
  
 
     # DOESNT WORK 
-    labels2,values2 = getRepoLanguages(repoName,user)
+    labels2,values2 = getRepoLanguages(repoName,username)
     
     colorPalette = []
     

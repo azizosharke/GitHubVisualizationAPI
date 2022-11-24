@@ -28,6 +28,7 @@ def page_not_found(error):
     return render_template('login.html', error=error)
 
 def getCommitsInRepo(user):
+    user.login
     repoNames = []
     countOfCommitsInRepo = []
     currentCountOfCommits = 0
@@ -49,6 +50,7 @@ def getCommitsInRepo(user):
 
 ##### Get breakdown of repos by language
 def getLanguageBreakdown(user):
+    user.login
     language_count = ([], [])
     for repo in user.get_repos():
         print(repo)
