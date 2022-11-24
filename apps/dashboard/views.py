@@ -1,4 +1,5 @@
 from array import *
+import random
 from flask import Blueprint, render_template, request
 from github import Github
 import datetime as DT
@@ -124,7 +125,7 @@ def graph():
     username = nameWithRepo[0:spaceIndex]
     repoName = nameWithRepo[spaceIndex+1:]
     
-    g = Github('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')
+    g = Github('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')
     user = g.get_user(username)
         
     user.login
@@ -137,9 +138,12 @@ def graph():
 
     # DOESNT WORK 
     labels2,values2 = getRepoLanguages(repoName,user)
-
-
-
+    
+    colorPalette = []
+    
+    for _ in range(len(labels2)):
+        rgb = 'rgb(' + str(round(random.random() *255)) + ',' + str(round(random.random() *255)) + ',' + str(round(random.random() *255)) + ')'
+        colorPalette.append(rgb)
     
     
-    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1,labels2 = labels2, values2 = values2, username = username, repoName = repoName)
+    return render_template("dashboard/graph.html", labels1 = labels1, values1 = values1,labels2 = labels2, values2 = values2, username = username, repoName = repoName, colorList = colorPalette)
